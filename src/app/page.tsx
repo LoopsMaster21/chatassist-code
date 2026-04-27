@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useEffect, useRef, useState, useActionState } from 'react';
 import { ChatLayout } from '@/components/chat/chat-layout';
 import { handleSendMessage } from '@/lib/actions';
 import type { ChatMessage as ChatMessageType } from '@/lib/types';
@@ -17,7 +16,7 @@ const initialMessages: ChatMessageType[] = [
 
 export default function Home() {
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
-  const [state, formAction] = useFormState(handleSendMessage, {
+  const [state, formAction] = useActionState(handleSendMessage, {
     newMessage: null,
     error: null,
   });
