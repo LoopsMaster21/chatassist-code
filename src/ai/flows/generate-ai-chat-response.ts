@@ -1,7 +1,7 @@
 'use server';
 
 import {ai} from '@/ai/genkit';
-import {type Message} from 'genkit';
+import {type Message} from 'genkit/ai';
 import {z} from 'zod';
 
 const KnowledgeEntrySchema = z.object({
@@ -600,7 +600,7 @@ const faqTool = ai.defineTool(
 );
 
 
-const GenerateAiChatResponseInputSchema = z.object({
+const ChatbotRespondsWithTextInputSchema = z.object({
   query: z.string().describe('The user query to the chatbot.'),
   chatHistory: z.array(z.object({
     role: z.enum(['user', 'model']),
@@ -608,15 +608,15 @@ const GenerateAiChatResponseInputSchema = z.object({
   })).optional().describe('The recent history of the conversation.'),
   summary: z.string().nullable().optional().describe('A summary of the older parts of the conversation.'),
 });
-export type GenerateAiChatResponseInput = z.infer<typeof GenerateAiChatResponseInputSchema>;
+export type ChatbotRespondsWithTextInput = z.infer<typeof ChatbotRespondsWithTextInputSchema>;
 
-const GenerateAiChatResponseOutputSchema = z.object({
-  response: z.string().describe('The text response from the chatbot.'),
+const ChatbotRespondsWithTextOutputSchema = z.object({
+  textResponse: z.string().describe('The text response from the chatbot.'),
 });
-export type GenerateAiChatResponseOutput = z.infer<typeof GenerateAiChatResponseOutputSchema>;
+export type ChatbotRespondsWithTextOutput = z.infer<typeof ChatbotRespondsWithTextOutputSchema>;
 
-export async function generateAiChatResponse(input: GenerateAiChatResponseInput): Promise<GenerateAiChatResponseOutput> {
-  return generateAiChatResponseFlow(input);
+export async function chatbotRespondsWithText(input: ChatbotRespondsWithTextInput): Promise<ChatbotRespondsWithTextOutput> {
+  return chatbotRespondsWithTextFlow(input);
 }
 
 const systemPrompt = `You are Spinneys Chat, an AI chatbot for Spinneys Lebanon. Your primary goal is to answer user questions and provide helpful information related to Spinneys.
@@ -637,11 +637,11 @@ Based on the tool's output, follow these rules:
 `;
 
 
-const generateAiChatResponseFlow = ai.defineFlow(
+const chatbotRespondsWithTextFlow = ai.defineFlow(
   {
-    name: 'generateAiChatResponseFlow',
-    inputSchema: GenerateAiChatResponseInputSchema,
-    outputSchema: GenerateAiChatResponseOutputSchema,
+    name: 'chatbotRespondsWithTextFlow',
+    inputSchema: ChatbotRespondsWithTextInputSchema,
+    outputSchema: ChatbotRespondsWithTextOutputSchema,
   },
   async (input) => {
     const messages: Message[] = [];
@@ -672,7 +672,9 @@ const generateAiChatResponseFlow = ai.defineFlow(
     });
 
     return {
-      response: text,
+      textResponse: text,
     };
   }
 );
+
+    

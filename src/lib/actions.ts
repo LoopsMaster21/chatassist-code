@@ -1,6 +1,6 @@
 'use server';
 
-import { generateAiChatResponse } from '@/ai/flows/generate-ai-chat-response';
+import { chatbotRespondsWithText } from '@/ai/flows/generate-ai-chat-response';
 import { summarizeChatHistory } from '@/ai/flows/summarize-chat-history';
 import { aiTextToSpeechOutput } from '@/ai/flows/convert-ai-response-to-speech';
 import type { ChatMessage } from '@/lib/types';
@@ -54,7 +54,7 @@ export async function handleSendMessage(
   }
 
   try {
-    const aiResponse = await generateAiChatResponse({ 
+    const aiResponse = await chatbotRespondsWithText({ 
       query: prompt,
       chatHistory: recentHistory.map(({role, content}) => ({role, content})),
       summary
@@ -63,7 +63,7 @@ export async function handleSendMessage(
     const newMessage: ChatMessage = {
       id: crypto.randomUUID(),
       role: 'model',
-      content: aiResponse.response,
+      content: aiResponse.textResponse,
     };
 
     return { newMessage, error: null };
@@ -90,3 +90,5 @@ export async function handleTextToSpeech(
     return { audioDataUri: null, error: 'Failed to convert text to speech.' };
   }
 }
+
+    
