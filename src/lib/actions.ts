@@ -36,30 +36,29 @@ export async function handleSendMessage(
   }
 
 
-  let finalPrompt = '';
-  const conversationHistoryForPrompt = history
-    .filter(msg => !msg.isLoading)
-    .map(msg => `${msg.role === 'user' ? 'User' : 'AI'}: ${msg.content}`);
+  let summary: string | null = null;
+  let recentHistory = history.filter(msg => !msg.isLoading);
 
-  if (history.length > MAX_HISTORY_LENGTH) {
-    const historyToSummarize = history.slice(0, -HISTORY_TO_SUMMARIZE_THRESHOLD);
+  if (recentHistory.length > MAX_HISTORY_LENGTH) {
+    const historyToSummarize = recentHistory.slice(0, -HISTORY_TO_SUMMARIZE_THRESHOLD);
+    recentHistory = recentHistory.slice(-HISTORY_TO_SUMMARIZE_THRESHOLD);
     
     try {
-      const summary = await summarizeChatHistory({
+      summary = await summarizeChatHistory({
         chatHistory: historyToSummarize.map(({ role, content }) => ({ role, content })),
       });
-      conversationHistoryForPrompt.unshift(`Summary of the conversation so far: ${summary}`);
-
     } catch (e) {
       console.error('Error summarizing chat history:', e);
-      // Fallback to simpler history if summarization fails
+      // Fallback to not using summary if it fails
     }
   }
-  
-  finalPrompt = conversationHistoryForPrompt.join('\n');
 
   try {
-    const aiResponse = await generateAiChatResponse({ prompt: finalPrompt });
+    const aiResponse = await generateAiChatResponse({ 
+      query: prompt,
+      chatHistory: recentHistory.map(({role, content}) => ({role, content})),
+      summary
+    });
 
     const newMessage: ChatMessage = {
       id: crypto.randomUUID(),

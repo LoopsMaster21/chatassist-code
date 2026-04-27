@@ -10,7 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 const initialMessages: ChatMessageType[] = [
   {
     role: 'model',
-    content: "Hello! I'm ChatAssist, powered by Gemini. How can I help you today?",
+    content: "Hello! I'm Spinneys Chat, your AI assistant for Spinneys Lebanon. How can I help you today?",
     id: crypto.randomUUID(),
   },
 ];
