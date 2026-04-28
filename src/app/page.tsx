@@ -15,7 +15,7 @@ const initialMessages: ChatMessageType[] = [
 ];
 
 export default function Home() {
-  const [messages, setMessages] = useState<ChatMessageType[]>([]);
+  const [messages, setMessages] = useState<ChatMessageType[]>(initialMessages);
   const [state, formAction] = useActionState(handleSendMessage, {
     newMessage: null,
     error: null,
@@ -25,22 +25,6 @@ export default function Home() {
   const { toast } = useToast();
 
   useEffect(() => {
-    try {
-      const storedMessages = localStorage.getItem('chatHistory');
-      if (storedMessages) {
-        setMessages(JSON.parse(storedMessages));
-      } else {
-        setMessages(initialMessages);
-      }
-    } catch (error) {
-      setMessages(initialMessages);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (messages.length > 0) {
-      localStorage.setItem('chatHistory', JSON.stringify(messages));
-    }
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
