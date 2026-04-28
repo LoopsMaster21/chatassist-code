@@ -42,7 +42,6 @@ export function ChatLayout({
         </Avatar>
         <div className="ml-4">
           <h1 className="text-xl font-bold font-headline">Spinneys Chat</h1>
-          <p className="text-sm text-muted-foreground">AI powered by Gemini</p>
         </div>
       </div>
 
