@@ -1,5 +1,5 @@
 import { type RefObject } from 'react';
-import { SendHorizonal, Sparkles } from 'lucide-react';
+import { SendHorizonal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -37,7 +37,7 @@ export function ChatLayout({
       <div className="flex items-center p-4 border-b">
         <Avatar className="h-10 w-10">
           <AvatarFallback className="bg-primary text-primary-foreground">
-            <Sparkles />
+            S
           </AvatarFallback>
         </Avatar>
         <div className="ml-4">
