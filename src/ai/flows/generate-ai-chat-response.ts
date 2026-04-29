@@ -665,6 +665,7 @@ const chatbotRespondsWithTextFlow = ai.defineFlow(
     messages.push({ role: 'user', content: [{ text: input.query }] });
 
     const { text } = await ai.generate({
+      model: 'googleai/gemini-pro',
       messages: messages,
       system: systemPrompt,
       tools: [faqTool],
@@ -695,5 +696,3 @@ const chatbotRespondsWithTextFlow = ai.defineFlow(
     };
   }
 );
-
-    
