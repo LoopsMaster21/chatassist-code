@@ -1,11 +1,5 @@
 'use server';
-/**
- * @fileOverview A Genkit flow for converting AI-generated text responses into natural-sounding speech.
- *
- * - aiTextToSpeechOutput - A function that converts a given text to speech.
- * - AiTextToSpeechOutputInput - The input type for the aiTextToSpeechOutput function.
- * - AiTextToSpeechOutputOutput - The return type for the aiTextToSpeechOutput function.
- */
+
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';

@@ -1,11 +1,4 @@
 'use server';
-/**
- * @fileOverview This file defines a Genkit flow for summarizing chat history.
- *
- * - summarizeChatHistory - A function that takes a chat history and returns a concise summary.
- * - ChatHistoryInput - The input type for the summarizeChatHistory function.
- * - ChatSummaryOutput - The return type for the summarizeChatHistory function.
- */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';

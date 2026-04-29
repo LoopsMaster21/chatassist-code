@@ -1,11 +1,4 @@
 'use server';
-/**
- * @fileOverview This file defines a Genkit flow for dynamically summarizing chat context.
- *
- * - summarizeChatContext - A function that summarizes chat history to retain key information for ongoing conversation.
- * - SummarizeChatContextInput - The input type for the summarizeChatContext function.
- * - SummarizeChatContextOutput - The return type for the summarizeChatContext function.
- */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';

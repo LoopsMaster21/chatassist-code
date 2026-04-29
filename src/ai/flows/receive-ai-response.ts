@@ -1,11 +1,5 @@
 'use server';
-/**
- * @fileOverview This file defines a Genkit flow for processing a user's message and receiving an AI-generated response.
- *
- * - receiveAiResponse - A function that handles receiving an AI chat response.
- * - ReceiveAiResponseInput - The input type for the receiveAiResponse function.
- * - ReceiveAiResponseOutput - The return type for the receiveAiResponse function.
- */
+
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
