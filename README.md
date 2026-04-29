@@ -86,3 +86,4 @@ This project includes a Next.js web app for the chat interface and Genkit for th
 
 3.  **Access the Chatbot:**
     Open your browser and navigate to `http://localhost:9002` to start interacting with Spinneys ChatAssist.
+ 
