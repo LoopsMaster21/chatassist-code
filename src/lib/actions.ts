@@ -71,7 +71,7 @@ export async function handleSendMessage(
     console.error('Error generating AI response:', error);
     return {
       newMessage: null,
-      error: 'Failed to get AI response. Please try again.',
+      error: 'Failed to get AI response. Please check your GEMINI_API_KEY and try again.',
     };
   }
 }
@@ -90,5 +90,3 @@ export async function handleTextToSpeech(
     return { audioDataUri: null, error: 'Failed to convert text to speech.' };
   }
 }
-
-    
